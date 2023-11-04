@@ -1,49 +1,33 @@
-print("DFS is :")
-graph={'a':['b','c'],
-       'b':['d','e'],
-       'c':['f'],
-       'd':[],
-       'e':['f'],
-       'f':[]}   
-visited = set()
-
-def dfs(visited, graph, node):
-    if node not in visited:
-        print(node)
-        visited.add(node)
-        
-        for neighbor in graph[node]:
-            dfs(visited, graph, neighbor)
-dfs(visited, graph, 'a')
-
-print("\n")
-print("BFS is :")
-
 graph = {
-  'A' : ['B','C'],
-  'B' : ['D', 'E'],
-  'C' : ['F'],
-  'D' : [],
-  'E' : ['F'],
-  'F' : []
+    "0": ["3", "1"],
+    "3": ["0", "1", "2","4"],
+    "1": ["0", "3", "2","5","6"],
+    "2": ["3","1","4","5"],
+    "4": ["3","2","6"],
+    "5": ["2","1"],
+    "6": ["4","1"]
 }
 
-visited = []
-queue = []
 
-def bfs(visited, graph, node):
-  visited.append(node)
-  queue.append(node)
+def bfs( start):
+    visited = []
+    queue = [start]
+    while queue:
+        print(queue)
+        v = queue.pop(0)
+        if v not in visited:
+            visited.append(v)
+            neighbors = graph[v]
+            for neighbors in neighbors:
+                queue.append(neighbors)
 
-  while queue:
-    s = queue.pop(0) 
-    print (s, end = " ") 
+    print(visited)
 
-    for neighbour in graph[s]:
-      if neighbour not in visited:
-        visited.append(neighbour)
-        queue.append(neighbour)
 
-bfs(visited, graph, 'A')
+# num_of_nodes = int(input("Enter Number Of Nodes:"))
+# for i in range(num_of_nodes):
+#     name_of_node = input("Enter Node letter: ")
+#     neighbors = input("Enter Neighbors: ").split(" ")
+#     graph[name_of_node] = [neighbors.strip() for neighbors in neighbors]
 
-print("\n")
+bfs("0")
